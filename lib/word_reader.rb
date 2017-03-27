@@ -4,7 +4,7 @@ class WordReader
       f = File.new(file_name, "r:UTF-8")
       lines = f.readlines
       f.close
-      return lines.sample.chomp
+      return lines.sample.downcase.chomp
     else
       return nil
     end

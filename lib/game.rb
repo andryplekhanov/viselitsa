@@ -11,10 +11,6 @@ class Game
   end
 
   def get_letters(slovo)
-    if slovo == nil || slovo == ""
-      abort("Вы не ввели слово для игры")
-    end
-
     return slovo.split("")
   end
 
@@ -23,7 +19,7 @@ class Game
     letter = ""
 
     while letter == "" do
-      letter = STDIN.gets.encode("UTF-8").chomp
+      letter = STDIN.gets.encode("UTF-8").downcase.chomp
     end
 
     next_step(letter)

@@ -7,8 +7,8 @@ if Gem.win_platform?
   end
 end
 
-require_relative "game"
-require_relative "result_printer"
+require_relative "lib/"
+require_relative "lib/result_printer"
 require_relative "word_reader"
 
 current_path = File.dirname(__FILE__)

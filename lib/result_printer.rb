@@ -25,7 +25,7 @@ class ResultPrinter
 
     puts "\nСлово: " + get_word_for_print(game.letters, game.good_letters)
 
-    puts "Ошшибки (#{game.errors}): #{game.bad_letters.join(", ")}"
+    puts "Ошибки (#{game.errors}): #{game.bad_letters.join(", ")}"
 
     print_viselitsa(game.errors)
 
@@ -47,7 +47,7 @@ class ResultPrinter
       if good_letters.include?(item)
         result += item + " "
       else
-        result += "__ "
+        result += "_ "
       end
     end
 
