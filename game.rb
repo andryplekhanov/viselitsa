@@ -1,5 +1,4 @@
 class Game
-
   def initialize(slovo)
     @letters = get_letters(slovo)
 
@@ -19,8 +18,6 @@ class Game
     return slovo.split("")
   end
 
-# 1. спросить букву с консоли
-# 2. проверить результат
   def ask_next_letter
     puts("\n Введите следующую букву")
     letter = ""
@@ -32,8 +29,6 @@ class Game
     next_step(letter)
   end
 
-# Метод  next_step должен проверить наличие буквы в загаданном слове
-#  или среди уже названных букв (массивы @good_letters и  @bad_letters)
   def next_step(bukva)
     if @status == -1 || @status == 1
       return
@@ -46,9 +41,9 @@ class Game
     if @letters.include?(bukva)
       @good_letters << bukva
 
-        if @good_letters.sort == letters.uniq.sort
-          @status = 1
-        end
+      if @good_letters.sort == letters.uniq.sort
+        @status = 1
+      end
     else
       @bad_letters << bukva
       @errors += 1
@@ -78,5 +73,4 @@ class Game
   def errors
     @errors
   end
-
 end

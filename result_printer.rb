@@ -21,18 +21,16 @@ class ResultPrinter
   end
 
   def print_status(game)
-
     cls
 
     puts "\nСлово: " + get_word_for_print(game.letters, game.good_letters)
-    
+
     puts "Ошшибки (#{game.errors}): #{game.bad_letters.join(", ")}"
 
     print_viselitsa(game.errors)
 
     if game.errors >= 7
       puts "Вы проиграли!"
-
     else
       if game.letters.uniq.size == game.good_letters.size
         puts "Поздравляем! Вы выиграли!\n\n"
