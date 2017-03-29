@@ -1,4 +1,6 @@
 class Game
+  MAX_ERRORS = 7
+
   def initialize(slovo)
     @letters = get_letters(slovo)
 
@@ -25,54 +27,57 @@ class Game
     next_step(letter)
   end
 
-  def next_step(bukva)
-    if @status == -1 || @status == 1
-      return
+  def is_good?(letter)
+    @letters.include?(letter) ||
+      (letter == "е" && letters.include?("ё")) ||
+      (letter == "ё" && letters.include?("е")) ||
+      (letter == "и" && letters.include?("й")) ||
+      (letter == "й" && letters.include?("и"))
+  end
+
+  def add_letter_to(letters, letter)
+    letters << letter
+
+    case letter
+      when 'и' then letters << 'й'
+      when 'й' then letters << 'и'
+      when 'е' then letters << 'ё'
+      when 'ё' then letters << 'е'
     end
+  end
 
-    if @good_letters.include?(bukva) || @bad_letters.include?(bukva)
-      return
-    end
+  def solved?
+    (@letters - @good_letters).empty?
+  end
 
-    if (@letters.include?(bukva) ||
-      (bukva == "е" && letters.include?("ё")) ||
-      (bukva == "ё" && letters.include?("е")) ||
-      (bukva == "и" && letters.include?("й")) ||
-      (bukva == "й" && letters.include?("и"))
-    )
-      @good_letters << bukva
+  def repeated?(letter)
+    @good_letters.include?(letter) || @bad_letters.include?(letter)
+  end
 
-      if bukva == "е"
-        @good_letters << "ё"
-      end
+  def lost?
+    @errors >= MAX_ERRORS
+  end
 
-      if bukva == "ё"
-        @good_letters << "е"
-      end
+  def next_step(letter)
+    return if @status == -1 || @status == 1
 
-      if bukva == "и"
-        @good_letters << "й"
-      end
+    return if repeated?(letter)
 
-      if bukva == "й"
-        @good_letters << "и"
-      end
+    if is_good?(letter)
+      add_letter_to(@good_letters, letter)
 
-      if (@letters - @good_letters).empty?
-        @status = 1
-      end
+      @status = 1 if solved?
+
     else
-      @bad_letters << bukva
+      add_letter_to(@bad_letters, letter)
       @errors += 1
 
-      if @errors >= 7
-        @status = -1
-      end
+      @status = -1 if lost?
     end
   end
 
   def letters
-    return @letters
+    @letters
   end
 
   def good_letters
