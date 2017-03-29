@@ -34,11 +34,12 @@ class Game
       return
     end
 
-    if @letters.include?(bukva) ||
+    if (@letters.include?(bukva) ||
       (bukva == "е" && letters.include?("ё")) ||
       (bukva == "ё" && letters.include?("е")) ||
       (bukva == "и" && letters.include?("й")) ||
       (bukva == "й" && letters.include?("и"))
+    )
       @good_letters << bukva
 
       if bukva == "е"
@@ -57,27 +58,10 @@ class Game
         @good_letters << "и"
       end
 
-      if @good_letters.sort == letters.uniq.sort
+      if (@letters - @good_letters).empty?
         @status = 1
       end
     else
-
-      if bukva == "е"
-        @bad_letters << "ё"
-      end
-
-      if bukva == "ё"
-        @bad_letters << "е"
-      end
-
-      if bukva == "и"
-        @bad_letters << "й"
-      end
-
-      if bukva == "й"
-        @bad_letters << "и"
-      end
-
       @bad_letters << bukva
       @errors += 1
 

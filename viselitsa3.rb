@@ -9,9 +9,9 @@ end
 
 require 'unicode_utils'
 
-require_relative "game"
-require_relative "result_printer"
-require_relative "word_reader"
+require_relative "lib/game.rb"
+require_relative "lib/result_printer.rb"
+require_relative "lib/word_reader.rb"
 
 current_path = File.dirname(__FILE__)
 
