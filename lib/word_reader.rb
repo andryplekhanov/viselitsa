@@ -8,6 +8,6 @@ class WordReader
       abort "Программа не может прочитать файл: #{file_name}"
     end
 
-    return lines.sample.downcase.chomp
+    lines.sample.downcase.chomp
   end
 end
